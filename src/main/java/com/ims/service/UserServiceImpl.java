@@ -1,6 +1,7 @@
 package com.ims.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,20 @@ public class UserServiceImpl implements UserService {
 	public void CreateUser(User user) {
 		// TODO Auto-generated method stub
 		this._userRepository.save(user);
+	}
+
+	@Override
+	public User GetUserByID(long userID) {
+		// TODO Auto-generated method stub
+		Optional<User> optional =_userRepository.findById(userID);
+		User user = null;
+		if(optional.isPresent()) {
+			user = optional.get();
+		}
+		else {
+			throw new RuntimeException("User not found with this id : " + userID);
+		}
+		return user;
 	}
 	
 }

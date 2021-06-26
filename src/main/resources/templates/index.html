@@ -20,6 +20,7 @@
 				<th>ContactNumber</th>
 				<th>Gender</th>
 				<th>Role</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,6 +30,8 @@
 				<td th:text = "${user.ContactNumber}"></td>
 				<td th:text = "${user.Gender}"></td>
 				<td th:text = "${user.RoleId}"></td>
+				<td> <a th:href="@{/UpdateUser/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
+				</td>
 		</tbody>
 		</table>
 	</div>
