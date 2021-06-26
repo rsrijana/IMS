@@ -1,8 +1,11 @@
 package com.ims.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,18 +28,26 @@ public class UserController {
 	}
 	
 	@GetMapping("/CreateNewUser")
-	public String CreateNewUser(Model model) {
+	public String CreateNewUser( Model model) {
 		//creating an user
+
 		User user = new User();
 		model.addAttribute("user",user);
 		return "UserForm";
 	}
 	
 	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute("user") User user) {
+	public String saveUser(@Valid @ModelAttribute("user") User user, Errors errors,Model model) {
 		// save employee to database
-		_userService.CreateUser(user);
-		return "redirect:/";
+		 if (null != errors && errors.getErrorCount() > 0) {
+			 return "UserForm";
+	        }
+		 else {
+	            model.addAttribute("successMsg", "User created successfully!!");
+	            _userService.CreateUser(user);
+	            return "success";
+	        }
+		
 	}
 	
 	@GetMapping("/UpdateUser/{id}")

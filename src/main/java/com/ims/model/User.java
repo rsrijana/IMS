@@ -5,18 +5,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import lombok.Data;
+@Data
 @Entity
 @Table(name = "User")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+    @NotEmpty(message = "Username is required.")
 	private String Username;
+    
+    @NotEmpty(message = "Password is required.")
 	private String Password;
+    
+    @NotEmpty(message = "Address is required.")
 	private String Address;
+    
+    @NotEmpty(message = "ContactNumber is required.")
+    @Size(max = 10, min = 10, message = "Contact number should be of 10 digits")
+    @Pattern(regexp = "[7-9][0-9]{9}", message = "Mobile number is invalid!!")
 	private String ContactNumber;
+    
+    @NotEmpty(message = "Gender is required.")
 	private String Gender;
+    
 	private int RoleId;
 	
 	public long getId() {

@@ -7,6 +7,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+	
+<script type = "text/javascript">
+            function successfullMessage() {
+               alert ("User has been successfully created");
+            }
+      </script>
 </head>
 <body>
 	<div class="container">
@@ -16,26 +22,49 @@
 
 		<form action="#" th:action="@{/saveUser}" th:object="${user}"
 			method="POST">
-			<input type="text" th:field="*{Username}"
+			<div class="form-group">
+					<input type="text" th:field="*{Username}"
 				placeholder="Please Enter Username" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{Password}"
+				<p class="alert alert-danger" th:if="${#fields.hasErrors('Username')}" th:errors="*{Username}">
+			</div>
+		
+				<div class="form-group">
+					<input type="text" th:field="*{Password}"
 				placeholder="Please Enter Password" class="form-control mb-4 col-4">
+				<p class="alert alert-danger" th:if="${#fields.hasErrors('Password')}" th:errors="*{Password}">
+				</div>
 				
-				<input type="text" th:field="*{ContactNumber}"
+				<div class="form-group">
+					<input type="text" th:field="*{ContactNumber}"
 				placeholder="Please Enter Contact" class="form-control mb-4 col-4">
+				<p class="alert alert-danger" th:if="${#fields.hasErrors('ContactNumber')}" th:errors="*{ContactNumber}">
+				</div>
 				
-				<input type="text" th:field="*{Address}"
+				
+				
+			    <div class="form-group">
+			    	<input type="text" th:field="*{Address}"
 				placeholder="Please Enter Address" class="form-control mb-4 col-4">
+			    <p class="alert alert-danger" th:if="${#fields.hasErrors('Address')}" th:errors="*{Address}">
+				 </div>
 				
-				<input type="text" th:field="*{Gender}"
+				<div class="form-group">
+					<input type="text" th:field="*{Gender}"
 				placeholder="Please Enter Gender" class="form-control mb-4 col-4">
+				<p class="alert alert-danger" th:if="${#fields.hasErrors('Gender')}" th:errors="*{Gender}">
+				</div>
 				
-				<input type="text" th:field="*{RoleId}"
+				<div class="form-group">
+						<input type="text" th:field="*{RoleId}"
 				placeholder="Please Enter Role" class="form-control mb-4 col-4">
+				</div>
 				
-				<button type="submit" class="btn btn-info col-2"> Save User</button>
 				
+				<div class="form-group">
+					<button type="submit" class="btn btn-info col-2"> Save User</button>
+				</div>
+				
+      </form>
 				
 		</form>
 		
